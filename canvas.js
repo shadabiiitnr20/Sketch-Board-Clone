@@ -32,17 +32,17 @@ tool.lineWidth = pencilWidth;
 //mousedown -> start new path, //mousemove -> path fill (graphics)
 canvas.addEventListener("mousedown", (e) => {
   mouseDown = true;
-  // beginPath({
-  //   x: e.clientX,
-  //   y: e.clientY,
-  // });
-  let data = {
+  beginPath({
     x: e.clientX,
     y: e.clientY,
-  };
+  });
+  // let data = {
+  //   x: e.clientX,
+  //   y: e.clientY,
+  // };
 
   //send data to server
-  socket.emit("beginPath", data);
+  // socket.emit("beginPath", data);
 });
 
 canvas.addEventListener("mousemove", (e) => {
@@ -55,7 +55,8 @@ canvas.addEventListener("mousemove", (e) => {
     };
 
     //send data to server
-    socket.emit("drawStroke", data);
+    // socket.emit("drawStroke", data);
+    drawStroke(data);
   }
 });
 
@@ -121,8 +122,8 @@ redo_icon.addEventListener("click", (e) => {
     trackValue: track,
     undoRedoTracker,
   };
-  socket.emit("undoRedo", trackObj);
-  // undoRedoCanvas(trackObj);
+  // socket.emit("undoRedo", trackObj);
+  undoRedoCanvas(trackObj);
 });
 
 undo_icon.addEventListener("click", (e) => {
@@ -131,8 +132,8 @@ undo_icon.addEventListener("click", (e) => {
     trackValue: track,
     undoRedoTracker,
   };
-  socket.emit("undoRedo", trackObj);
-  // undoRedoCanvas(trackObj);
+  // socket.emit("undoRedo", trackObj);
+  undoRedoCanvas(trackObj);
 });
 
 const undoRedoCanvas = (trackObj) => {
@@ -147,16 +148,16 @@ const undoRedoCanvas = (trackObj) => {
   };
 };
 
-socket.on("beginPath", (data) => {
-  //data from back-end
-  beginPath(data);
-});
+// socket.on("beginPath", (data) => {
+//   //data from back-end
+//   beginPath(data);
+// });
 
-socket.on("drawStroke", (data) => {
-  //data from back-end
-  drawStroke(data);
-});
+// socket.on("drawStroke", (data) => {
+//   //data from back-end
+//   drawStroke(data);
+// });
 
-socket.on("undoRedo", (data) => {
-  undoRedo(data);
-});
+// socket.on("undoRedo", (data) => {
+//   undoRedo(data);
+// });
